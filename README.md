@@ -1,7 +1,7 @@
 # django-nostr-login-demo
 This is a simple demo of how to use Nostr extensions for authentication, using Django's built-in User models.
 
-Note: Please submit a PR if you can improve this! I play with django and nostr in my free time so I'm still learning.
+Note: Please submit a PR if you can improve this!
 
 # Install
 
