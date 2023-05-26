@@ -24,8 +24,17 @@ Install requirements
 pip install -r requirements.txt
 ```
 
-Run the app
+# Run
+
+The first time you run it, you'll need to migrate the database:
+
+```commandline
+python manage.py migrate
+```
+
+
 
 ```commandline
 python manage.py runserver
 ```
+

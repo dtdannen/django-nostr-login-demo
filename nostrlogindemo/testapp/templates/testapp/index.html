@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nowstrich</title>
+    <script type="text/javascript">
+        async function callExtensionFunction(event) {
+            event.preventDefault();
+
+            // Get the user's public key
+            let publicKey = await window.nostr.getPublicKey();
+
+            const challenge_event = {
+                pubkey: publicKey,
+                kind: 0,
+                created_at: Math.floor(Date.now() / 1000),
+                tags: [],
+                content: "Please sign this message to prove your identity. This event is only for authentication purposes, it will not be sent to relays.",
+            };
+
+            //console.log("challenge event is " + JSON.stringify(challenge_event));
+
+            // Sign the challenge
+            let signedEvent = await window.nostr.signEvent(challenge_event);
+
+            //console.log("signed event is " + JSON.stringify(signedEvent));
+
+            // Place the signed event in the hidden input field
+            document.getElementById('signedEvent').value = JSON.stringify(signedEvent);
+
+            // Set form action details and submit the form
+            let form = document.getElementById('loginForm');
+            form.action = '/';
+            form.method = 'POST';
+            form.submit();
+        }
+    </script>
+</head>
+<body>
+{% if user.is_authenticated %}
+    <p>You are logged in as: {{ user.username }}</p>
+
+    <form id="logoutForm" method="GET" action="/">
+        {% csrf_token %}
+        <input type="hidden" id="logout" name="logout" value="true">
+        <button type="submit">Logout</button>
+    </form>
+
+{% else %}
+    <h2>Welcome to the Django Nostr Login Demo</h2>
+
+    <form id="loginForm" method="POST" action="/">
+        {% csrf_token %}
+        <input type="hidden" id="publicKey" name="publicKey" value="">
+        <input type="hidden" id="signedEvent" name="signedEvent" value="">
+        <button type="submit" onclick="callExtensionFunction(event)">Login with Nip-07 extension</button>
+    </form>
+
+{% endif %}
+<hr>
+<h3>Have ideas to improve this demo?</h3>
+<p>Please consider submitting a PR request here: <a href="https://github.com/dtdannen/django-nostr-login-demo">https://github.com/dtdannen/django-nostr-login-demo</a></p>
+
+</body>
+</html>
