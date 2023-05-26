@@ -1,7 +1,23 @@
 # django-nostr-login-demo
-This is a simple demo of how to use Nostr extensions for authentication, using Django's built-in User models.
+This is a simple demo of how to use Nostr extensions for authentication, using Django's built-in User models. This replaces the traditional username and password method of authentication, and it asks your Nostr extension that manages your secret key so the user never reveals their secret key to the application.
 
 Note: Please submit a PR if you can improve this!
+
+### Pre-login Screen
+
+![img.png](docs/img.png)
+
+### First popup gets user's public key
+
+![img_1.png](docs/img_1.png)
+
+### Second popup has user sign a message 
+
+![img_2.png](docs/img_2.png)
+
+### Then the user is logged in
+
+![img_3.png](docs/img_3.png)
 
 # Install
 
@@ -32,7 +48,14 @@ Make sure to create a Nostr account under your Alby account
 
 # Run
 
+Go to the top level django directory:
+
+```commandline
+cd nostrlogindemo
+```
+
 The first time you run it, you'll need to migrate the database:
+
 
 ```commandline
 python manage.py migrate
@@ -46,6 +69,6 @@ python manage.py runserver
 
 Then click the Login button and a window should pop up from your Nostr extension, letting you sign an event with your private key to prove you are your public key!
 
-# Find me on Nostr
+# Author
 
 npub1mgvwnpsqgrem7jfcwm7pdvdfz2h95mm04r23t8pau2uzxwsdnpgs0gpdjc
