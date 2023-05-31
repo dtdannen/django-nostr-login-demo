@@ -38,7 +38,7 @@
     </script>
 </head>
 <body>
-{% if user.is_authenticated %}
+{% if userobj %}
     {% if profile %}
         {% if profile.display_name %}
         <p>Welcome {{ profile.display_name }}</p>
@@ -47,7 +47,7 @@
         <p>your lightning address is {{ profile.lud16 }} </p>
         {% endif %}
     {% else %}
-    <p>Could not retrieve profile info from Nostr; you are still logged in as: {{ user.username }}</p>
+    <p>Could not retrieve profile info from Nostr; you are still logged in as: {{ userobj.username }}</p>
     {% endif %}
 
 <form id="logoutForm" method="GET" action="/">

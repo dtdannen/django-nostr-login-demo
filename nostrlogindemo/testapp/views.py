@@ -126,6 +126,7 @@ async def index(request):
         request = await handle_login(request)
         # get the user's profile if they have one
         if request.user.is_authenticated:
+            context['userobj'] = request.user
             profile = await get_profile(request.user)
             if profile is not None:
                 context['profile'] = profile

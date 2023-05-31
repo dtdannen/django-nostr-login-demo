@@ -17,7 +17,7 @@ Note: Please submit a PR if you can improve this!
 
 ### Then the user is logged in
 
-![img_3.png](docs/img_3.png)
+![img.png](img.png)
 
 # Install
 
